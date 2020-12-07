@@ -8,7 +8,8 @@
     "url": "git+https://github.com/keesvanlierop/advent-of-code-2020.git"
   },
   "scripts": {
-    "dev": "ts-node src/index.ts"
+    "do": "sh -c 'ts-node src/assignments/${0}.ts'",
+    "build": "tsc -p tsconfig.json"
   },
   "author": "Kees van Lierop <keesvlierop@gmail.com>",
   "license": "ISC",
