@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/keesvanlierop/advent-of-code-2020.git"
   },
+  "scripts": {
+    "dev": "ts-node src/index.ts"
+  },
   "author": "Kees van Lierop <keesvlierop@gmail.com>",
   "license": "ISC",
   "devDependencies": {
