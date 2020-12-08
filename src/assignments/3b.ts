@@ -48,4 +48,4 @@ const getAmountOfEncounteredTrees = async () => {
 	return multiply(amountOfEncounteredTreesForVelocities)
 }
 
-run('3a', getAmountOfEncounteredTrees)
+run('3b', getAmountOfEncounteredTrees)
