@@ -77,7 +77,6 @@ const getManhattanDistance = async () => {
 		const type = command.match(/[a-zA-Z]+/g)?.[0]
 		const value = Number(command.replace(/\D/g, ''))
 		ship.executeCommand(type, value)
-		console.log(ship.position, type, value)
 	})
 
 	return add([Math.abs(ship.position.x), Math.abs(ship.position.y)])
