@@ -6,6 +6,11 @@ export const add = (numbers: number[]) => {
 	return numbers.reduce((acc, number) => acc + number, 0)
 }
 
+export const toBinary = (number: number) =>
+	(number >>> 0).toString(2).padStart(36, '0')
+
+export const fromBinary = (number: string) => parseInt(number, 2)
+
 export const getNumbersThatAddUpTo = (
 	numbers: number[],
 	expectedresult: number,
