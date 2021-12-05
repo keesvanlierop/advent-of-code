@@ -26,7 +26,6 @@ const run = async () => {
 	const list = await readList('5.txt', '2015')
 
 	const stringState = getStringState(list)
-	console.log(stringState)
 
 	console.log(`The answer for 5a is: ${stringState.nice.length}`)
 }
