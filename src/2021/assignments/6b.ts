@@ -40,7 +40,7 @@ const run = async () => {
 
 	const state = getFishState(list[0].split(',').map(Number))
 
-	console.log(`The answer for 6a is: ${Object.values(state.fish).reduce((total, amount) => total + amount, 0)}`)
+	console.log(`The answer for 6b is: ${Object.values(state.fish).reduce((total, amount) => total + amount, 0)}`)
 }
 
 run()

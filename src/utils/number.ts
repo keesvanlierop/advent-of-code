@@ -6,16 +6,11 @@ export const add = (numbers: number[]) => {
 	return numbers.reduce((acc, number) => acc + number, 0)
 }
 
-export const toBinary = (number: number) =>
-	(number >>> 0).toString(2).padStart(36, '0')
+export const toBinary = (number: number) => (number >>> 0).toString(2).padStart(36, '0')
 
 export const fromBinary = (number: string) => parseInt(number, 2)
 
-export const getNumbersThatAddUpTo = (
-	numbers: number[],
-	expectedresult: number,
-	amountOfAdditionsIsUnkonwn = false,
-) => {
+export const getNumbersThatAddUpTo = (numbers: number[], expectedresult: number, amountOfAdditionsIsUnkonwn = false) => {
 	if (!amountOfAdditionsIsUnkonwn) {
 		return numbers.filter((number1, index, self) =>
 			self.some(
@@ -46,4 +41,13 @@ export const getNumbersThatAddUpTo = (
 			})
 			.find((sets) => sets.result === expectedresult)?.usedNumbers || []
 	)
+}
+
+export function fibonacci(n: number): number {
+	return n < 1 ? 0 : n <= 2 ? 1 : fibonacci(n - 1) + fibonacci(n - 2)
+}
+
+export const linearIncrement = (loop: number, total = 0): number => {
+	if (loop === 0) return total
+	return total + loop + linearIncrement(loop - 1)
 }
