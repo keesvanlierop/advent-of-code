@@ -35,3 +35,17 @@ export const chunk = (arr: any[], size: number) => {
 		return acc
 	}, [])
 }
+
+export function flatten(items: any[]) {
+	const flat: any[] = []
+
+	items.forEach((item) => {
+		if (Array.isArray(item)) {
+			flat.push(...flatten(item))
+		} else {
+			flat.push(item)
+		}
+	})
+
+	return flat
+}
