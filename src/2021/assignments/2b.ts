@@ -12,10 +12,7 @@ const defaultState = {
 	aim: 0,
 }
 
-const positionReducer = (
-	state: typeof defaultState,
-	command: readonly [CommandType, number],
-) => {
+const positionReducer = (state: typeof defaultState, command: readonly [CommandType, number]) => {
 	switch (command[0]) {
 		case CommandType.FORWARD:
 			return {
@@ -44,11 +41,7 @@ const run = async () => {
 
 	const position = getPositionInfo(commands)
 
-	console.log(position)
-
-	console.log(
-		`The answer for 2b is: ${position.horizontalPosition * position.depth}`,
-	)
+	console.log(`The answer for 2b is: ${position.horizontalPosition * position.depth}`)
 }
 
 run()
