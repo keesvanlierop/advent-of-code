@@ -49,3 +49,19 @@ export function flatten(items: any[]) {
 
 	return flat
 }
+
+export const permute = <T extends any>(input: T[]): T[][] => {
+	const permute = (res: any, item: any, key: any, arr: any) => {
+		return res.concat(
+			(arr.length > 1 &&
+				arr
+					.slice(0, key)
+					.concat(arr.slice(key + 1))
+					.reduce(permute, [])
+					.map((perm: any) => [item].concat(perm))) ||
+				item,
+		)
+	}
+
+	return input.reduce(permute, [])
+}
