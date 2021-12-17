@@ -50,7 +50,7 @@ export function flatten(items: any[]) {
 	return flat
 }
 
-export const permute = <T extends any>(input: T[]): T[][] => {
+export const permute = <T extends any>(input: T[], unique = false): T[][] => {
 	const permute = (res: any, item: any, key: any, arr: any) => {
 		return res.concat(
 			(arr.length > 1 &&
@@ -63,5 +63,5 @@ export const permute = <T extends any>(input: T[]): T[][] => {
 		)
 	}
 
-	return input.reduce(permute, [])
+	return input.reduce((res, item, key, arr) => (key > 0 && unique ? res : permute(res, item, key, arr)), [])
 }
