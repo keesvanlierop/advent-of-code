@@ -65,3 +65,28 @@ export const permute = <T extends any>(input: T[], unique = false): T[][] => {
 
 	return input.reduce((res, item, key, arr) => (key > 0 && unique ? res : permute(res, item, key, arr)), [])
 }
+
+export const isEqual = (a: any[], b: any[]) => JSON.stringify(a) === JSON.stringify(b)
+
+export const shuffle = <T extends any>(arr: T[]) => [...arr].sort(() => Math.random() - 0.5)
+
+export function combine<T extends any>(a: T[], min: number) {
+	var fn = (n: number, src: T[], got: T[], all: T[][]) => {
+		if (n == 0) {
+			if (got.length > 0) {
+				all[all.length] = got
+			}
+			return
+		}
+		for (var j = 0; j < src.length; j++) {
+			fn(n - 1, src.slice(j + 1), got.concat([src[j]]), all)
+		}
+		return
+	}
+	var all: T[][] = []
+	for (var i = min; i < a.length; i++) {
+		fn(i, a, [], all)
+	}
+	all.push(a)
+	return all
+}
