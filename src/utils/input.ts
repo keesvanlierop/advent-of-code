@@ -9,7 +9,7 @@ export const readFile = (file: string, type = 'utf8', base = basePath): Promise<
 	})
 }
 
-export const readList = async (file: string, year = '2021') => {
+export const readList = async (file: string, year = '2022') => {
 	const basePath = path.resolve(__dirname, `../${year}/input`)
 	const fileData = await readFile(file, 'utf8', basePath)
 	return fileData.split('\n')
