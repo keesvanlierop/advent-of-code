@@ -36,6 +36,13 @@ export const chunk = (arr: any[], size: number) => {
 	}, [])
 }
 
+export function* chunks<T extends any>(arr: T[], n: number) {
+	for (let i = 0; i < arr.length; i += n) {
+		yield arr.slice(i, i + n);
+	}
+}
+  
+
 export function flatten(items: any[]) {
 	const flat: any[] = []
 
