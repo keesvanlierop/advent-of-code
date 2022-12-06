@@ -1,5 +1,4 @@
 import { readList } from '@/utils'
-import { Console } from 'console'
 
 const PROCEDURE_REGEX = /move (\d+) from (\d+) to (\d+)/
 
@@ -57,10 +56,7 @@ const run = async () => {
 	const list = await readList('5.txt')
 
 	const cratesAndProcedures = getCratesAndProcedure(list)
-    console.log(cratesAndProcedures)
-
     const stacksAfterProcedures = getStacksAfterProcedures(cratesAndProcedures.stacks, cratesAndProcedures.procedures)
-    console.log(stacksAfterProcedures)
 
 	console.log(
 		`The answer for 5a is: ${[...stacksAfterProcedures].map(stack => stack.pop()).join('')}`,
