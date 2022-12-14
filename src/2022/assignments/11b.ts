@@ -5,18 +5,17 @@
 //     If true: throw to monkey 1
 //     If false: throw to monkey 6
 
-import { chunks, multiply, readList } from '@/utils'
+import { chunks, getLowestCommonMultiple, multiply, readList } from '@/utils'
 
 const AMOUNT_OF_ROWS = 10000
 const REDUCE_WORRY_LEVEL = 1
 let roundNumber = 1
 
 type MonkeyInput = [string, string, string, string, string, string]
-let lcm = BigInt(1)
 
 const operators = {
-    '+': (item: bigint, variantValue: bigint) => BigInt(eval(`${item.toString()} + ${variantValue.toString()}`)) % lcm,
-    '*': (item: bigint, variantValue: bigint) => BigInt(eval(`${item.toString()} * ${variantValue.toString()}`)) % lcm,
+    '+': (item: bigint, variantValue: bigint, lowestCommonMultipleValue: bigint) => (item + variantValue) % lowestCommonMultipleValue,
+    '*': (item: bigint, variantValue: bigint, lowestCommonMultipleValue: bigint) => (item * variantValue) % lowestCommonMultipleValue,
 }
 
 const getMonkeys = (list: string[]) => [...chunks(list, 6)].map(chunk => getMonkey(chunk as MonkeyInput))
@@ -27,9 +26,9 @@ const getMonkey = (monkeyInput: MonkeyInput) => {
 
     const [,,,,operator,variant] = monkeyInput[2].replace(/^\s+|\s+$/gm,'').split(' ')
 
-    const inspectItem = (item: bigint) => {
+    const inspectItem = (item: bigint, lowestCommonMultipleValue: bigint) => {
         const variantValue = getVariantValue(variant, item)
-        return operators[operator as keyof typeof operators](item, variantValue)
+        return operators[operator as keyof typeof operators](item, variantValue, lowestCommonMultipleValue)
     }
 
     const divisibleTest = BigInt(monkeyInput[3].replace(/^\s+|\s+$/gm,'').split(' by ')[1])
@@ -54,17 +53,17 @@ const getVariantValue = (variant: string, item: bigint) => {
     return BigInt(variant)
 }
 
-const runGame = (monkeys: (ReturnType<typeof getMonkey>[])) => {
+const runGame = (monkeys: (ReturnType<typeof getMonkey>[]), lowestCommonMultipleValue: bigint) => {
     while (roundNumber <= AMOUNT_OF_ROWS) {
-        doRound(monkeys)
+        doRound(monkeys, lowestCommonMultipleValue)
         roundNumber++
     }
 }
 
-const doRound = (monkeys: ReturnType<typeof getMonkey>[]) => {
+const doRound = (monkeys: ReturnType<typeof getMonkey>[], lowestCommonMultipleValue: bigint) => {
     monkeys.forEach(monkey => {
         monkey.items.forEach((item) => {
-            const updatedItem = BigInt(monkey.inspectItem(item))
+            const updatedItem = BigInt(monkey.inspectItem(item, lowestCommonMultipleValue))
             const targetMonkeyIndex = monkey.getTargetMonkey(updatedItem)
             const targetMonkey = monkeys.find(monkey => monkey.index === targetMonkeyIndex)!
             targetMonkey.items.push(updatedItem)
@@ -79,14 +78,14 @@ const run = async () => {
 	const list = await readList('11.txt')
 
     const monkeys = getMonkeys(list)
-    lcm = monkeys.map(monkey => monkey.divisibleTest).reduce((a, b) => a * b, BigInt(1));
+    const lowestCommonMultipleValue = getLowestCommonMultiple(monkeys.map(monkey => monkey.divisibleTest))
     
-    runGame(monkeys)
+    runGame(monkeys, lowestCommonMultipleValue)
 
     const twoMostActiveMonkeys = [...monkeys].sort((a, b) => b.amountOfThrows - a.amountOfThrows).slice(0, 2).map(monkey => monkey.amountOfThrows)
 
 	console.log(
-		`The answer for 11a is: ${multiply(twoMostActiveMonkeys)}`,
+		`The answer for 11b is: ${multiply(twoMostActiveMonkeys)}`,
 	)
 }
 

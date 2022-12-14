@@ -51,3 +51,6 @@ export const linearIncrement = (loop: number, total = 0): number => {
 	if (loop === 0) return total
 	return total + loop + linearIncrement(loop - 1)
 }
+
+export const getLowestCommonMultiple = (numbers: bigint[]) =>
+	numbers.reduce((a, b) => a * b, BigInt(1))
