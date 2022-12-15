@@ -64,6 +64,7 @@ const doRound = (monkeys: ReturnType<typeof getMonkey>[], lowestCommonMultipleVa
     monkeys.forEach(monkey => {
         monkey.items.forEach((item) => {
             const updatedItem = BigInt(monkey.inspectItem(item, lowestCommonMultipleValue))
+            console.log(roundNumber, updatedItem)
             const targetMonkeyIndex = monkey.getTargetMonkey(updatedItem)
             const targetMonkey = monkeys.find(monkey => monkey.index === targetMonkeyIndex)!
             targetMonkey.items.push(updatedItem)
