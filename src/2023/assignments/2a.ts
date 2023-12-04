@@ -9,7 +9,6 @@ const gameConfig = {
 
 const isPossibleGame = (gameId: string, sets: Record<string, number>[]) => {
     const game = { ...gameConfig }
-    console.log(gameId, sets)
     return sets.every(set => game.red >= (set.red || 0) && game.green >= (set.green || 0) && game.blue >= (set.blue || 0))
 }
 
@@ -32,8 +31,6 @@ const run = async () => {
             const parts = item.split(':')
             return Number(parts[0].split(' ')[1])
         })
-
-    console.log(possibleGames)
 
 	console.log(
 		`The answer for 2a is: ${add(possibleGames)}`,
