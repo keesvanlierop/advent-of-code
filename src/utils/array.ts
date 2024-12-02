@@ -38,10 +38,9 @@ export const chunk = (arr: any[], size: number) => {
 
 export function* chunks<T extends any>(arr: T[], n: number) {
 	for (let i = 0; i < arr.length; i += n) {
-		yield arr.slice(i, i + n);
+		yield arr.slice(i, i + n)
 	}
 }
-  
 
 export function flatten(items: any[]) {
 	const flat: any[] = []
@@ -96,4 +95,11 @@ export function combine<T extends any>(a: T[], min: number) {
 	}
 	all.push(a)
 	return all
+}
+
+export function removeElementAtIndex<T extends any>(arr: T[], i: number) {
+	if (i < 0 || i >= arr.length) {
+		throw new Error('Index out of bounds')
+	}
+	return [...arr.slice(0, i), ...arr.slice(i + 1)]
 }

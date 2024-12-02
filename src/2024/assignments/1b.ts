@@ -19,7 +19,7 @@ const run = async () => {
 
 	const similarityScores = Object.entries(registry).map(([key, value]) => ((key as unknown) as number) * value)
 
-	console.log(`The answer for 1a is: ${add(similarityScores)}`)
+	console.log(`The answer for 1b is: ${add(similarityScores)}`)
 }
 
 run()
