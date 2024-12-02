@@ -8,7 +8,7 @@
 		"url": "git+https://github.com/keesvanlierop/advent-of-code-2020.git"
 	},
 	"scripts": {
-		"do": "sh -c 'ts-node -r tsconfig-paths/register src/${1:=2023}/assignments/${0}.ts'",
+		"do": "sh -c 'ts-node -r tsconfig-paths/register src/${1:=2024}/assignments/${0}.ts'",
 		"build": "tsc -p tsconfig.json"
 	},
 	"author": "Kees van Lierop <keesvlierop@gmail.com>",
